@@ -13,6 +13,7 @@
     <script src="js/func.js"></script>
     <script src="js/geo.js"></script>
     <script type="text/javascript" src="js/jquery-ui.custom.min.js"></script>
+    <!-- <script src="js/checkStop.js"></script> -->
     
     
     
@@ -39,7 +40,9 @@
                     </form>
                         <form id="check" action="">
                             <input id="check-bus" type="checkbox" name="vehicle" onclick="checkThis(this)" >Buses<br>
-                            <input id="check-stops" type="checkbox" name="vehicle" onclick="checkStop(this)">Bus stop
+                            <!-- <input id="check-stops" type="checkbox" name="vehicle" onclick="checkStop(this)">Bus stop -->
+                            <input id="check-stops" type="checkbox" name="vehicle" onchange="getStops(this)">Bus stop
+                            
                         </form>
                 </div>
             </div>

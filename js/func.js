@@ -2,12 +2,14 @@
 // var busCheck = document.getElementById("check-bus").checked;
 // var stopCheck = document.getElementById("check-stops").checked
 var geocoder
+var map
+var zoom
 
 function initMap() {
   geocoder = new google.maps.Geocoder();
   var latlng = {lat: -23.4829, lng:  -46.501};
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 18,
+   map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 15,
     center: latlng,
     mapTypeId: google.maps.MapTypeId.SATELLITE,
   });
@@ -15,7 +17,7 @@ function initMap() {
     position: latlng,
     map: map
   });
-
+  zoom = map.getZoom();
   // Try HTML5 geolocation.
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
@@ -26,6 +28,8 @@ function initMap() {
 
       marker.setPosition(pos);
       map.setCenter(pos);
+      
+      
     }, function() {
       handleLocationError(true, infoWindow, map.getCenter());
     });
@@ -53,7 +57,8 @@ function initMap() {
                var location = new google.maps.LatLng(latitude, longitude);
                marker.setPosition(location);
                map.setCenter(location);
-               map.setZoom(18);
+               map.setZoom(15);
+               console.log(map.getZoom())
         
             }
           }
@@ -111,6 +116,7 @@ function initMap() {
       });
 
 
+      
   // if(stopCheck == true){
 
   //   console.log("oi")
@@ -173,17 +179,18 @@ function initMap() {
   //   xmlhttp.send();
   // }
 
-
-
-
-
-
-
-
-
-
 }
-  
+       
+function getStops(checkboxElem) {
+  if (checkboxElem.checked) {
+    console.log ("hi");
+    console.log(zoom);
+    console.log(map.getZoom());
+    
+  } else {
+    console.log("bye");
+  }
+}
 
 // function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 //   infoWindow.setPosition(pos);
