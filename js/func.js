@@ -49,11 +49,12 @@ function initMap() {
               $('#txtEndereco').val(results[0].formatted_address);
               $('#txtLatitude').val(latitude);
               $('#txtLongitude').val(longitude);
+
+               var location = new google.maps.LatLng(latitude, longitude);
+               marker.setPosition(location);
+               map.setCenter(location);
+               map.setZoom(18);
         
-              var location = new google.maps.LatLng(latitude, longitude);
-              marker.setPosition(location);
-              map.setCenter(location);
-              map.setZoom(16);
             }
           }
         })
@@ -64,10 +65,10 @@ function initMap() {
           carregarNoMapa($("#txtEndereco").val());
       })
       
-      $("#txtEndereco").blur(function() {
-        if($(this).val() != "")
-          carregarNoMapa($(this).val());
-      })
+      // $("#txtEndereco").blur(function() {
+      //   if($(this).val() != "")
+      //     carregarNoMapa($(this).val());
+      // })
       
       google.maps.event.addListener(marker, 'drag', function () {
         geocoder.geocode({ 'latLng': marker.getPosition() }, function (results, status) {
@@ -89,29 +90,24 @@ function initMap() {
                 label: item.formatted_address,
                 value: item.formatted_address,
                 latitude: item.geometry.location.lat(),
-                      longitude: item.geometry.location.lng()
+                longitude: item.geometry.location.lng()
               }
             }));
           })
         },
-        select: function (event, ui) {
-          $("#txtLatitude").val(ui.item.latitude);
-            $("#txtLongitude").val(ui.item.longitude);
-          var location = new google.maps.LatLng(ui.item.latitude, ui.item.longitude);
-          marker.setPosition(location);
-          map.setCenter(location);
-          map.setZoom(16);
-        }
+        // select: function (event, ui) {
+        //   $("#txtLatitude").val(ui.item.latitude);
+        //     $("#txtLongitude").val(ui.item.longitude);
+        //   var location = new google.maps.LatLng(ui.item.latitude, ui.item.longitude);
+        //   marker.setPosition(location);
+        //   map.setCenter(location);
+        //   map.setZoom(16);
+        // }
       });
       
       $("form").submit(function(event) {
         event.preventDefault();
-        
-        var endereco = $("#txtEndereco").val();
-        var latitude = $("#txtLatitude").val();
-        var longitude = $("#txtLongitude").val();
-        
-        alert("Endereço: " + endereco + "\nLatitude: " + latitude + "\nLongitude: " + longitude);
+        carregarNoMapa($("#txtEndereco").val());        
       });
 
 
